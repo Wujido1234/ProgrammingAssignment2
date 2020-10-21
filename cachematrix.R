@@ -1,15 +1,42 @@
-## Put comments here that give an overall description of what your
-## functions do
+# Script defines three functions
 
-## Write a short comment describing this function
+## makeSymGrid() - defines symmetric, invertible matrix from numeric input from stdin
+# M <- makeSymGrid(8);M
 
-makeCacheMatrix <- function(x = matrix()) {
+### makeCacheMatrix() - receives matrix as input, computes the inversion and caches result
+# M1 <- makeCacheMatrix(M)
 
+#### cacheSolve() - grab inversion from cache or compute with solve() if null
+# cacheSolve(M1)
+
+  makeSymGrid <- function(n) { i <- 1:n; 1 / outer(i - 1, i, "+") }
+
+  makeCacheMatrix <- function(x = matrix()) {
+
+    # placeholder for 'i'
+    i <- NULL
+      set <- function(y) {
+        x <<- y
+      i <<- NULL
+  }
+    get <- function() x
+    setinvert <- function(inverse) i <<- inverse
+    getinvert <- function() i
+    list(set = set,
+         get = get,
+         setinvert = setinvert,
+         getinvert = getinvert)
 }
 
-
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+  # function grabs cached inversion if present, otherwise compute for solve()
+  cacheSolve <- function(x, ...) {
+    i <- x$getinvert()
+    if (!is.null(i)) {
+      message("getting cached data")
+      return(i)
+  }
+    data <- x$get()
+    i <- solve(data, ...)
+    x$setinvert(i)
+    i
 }
