@@ -3,7 +3,7 @@
 ## makeSymGrid() - defines symmetric, invertible matrix from numeric input from stdin
 # M <- makeSymGrid(8);M
 
-### makeCacheMatrix() - receives matrix as input, computes the inversion and caches result
+### makeCacheMatrix() - receives matrix as input, and defines constructs to grab inversion
 # M1 <- makeCacheMatrix(M)
 
 #### cacheSolve() - grab inversion from cache or compute with solve() if null
